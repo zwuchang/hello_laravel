@@ -1,5 +1,10 @@
 @extends('layouts.default')
 @section('title','关于页')
 @section('content')
-    <h1>关于</h1>
+    <div class="jumbotron">
+        <h1>Hello Laravel</h1>
+        <p class="lead">
+            建设中...
+        </p>
+    </div>
 @stop
