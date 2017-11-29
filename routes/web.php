@@ -15,6 +15,6 @@
 //     return view('welcome');
 // });
 
-Route::get('/', function() {
-    return view('hello_world');
-});
+Route::get('/','StaticPagesController@home');
+Route::get('/help','StaticPagesController@help');
+Route::get('/about','StaticPagesController@about');
