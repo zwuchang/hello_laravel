@@ -9,21 +9,13 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-    <header class="navbar navbar-fixed-top navbar-inverse">
-        <div class="container">
-            <div class="col-md-offset-1 col-md-10">
-                <a href="/" id="logo">Sample App</a>
-            </div>
-            <nav>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/">首页</a></li>
-                    <li><a href="/help">帮助</a></li>
-                    <li><a href="javascript:alert('暂未准备好！');">登录</a></li>
-                    <li><a href="/about">关于</a></li>
-                </ul>
-            </nav>
+    @include('layouts._header');
+
+    <div class="container">
+        <div class="col-md-offset-1 col-md-10">
+            @yield('content')
+            @include('layouts._footer')
         </div>
-    </header>
-    @yield('content')
+    </div>
 </body>
 </html>
