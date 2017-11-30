@@ -14,6 +14,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        get_db_config();
         return view('users.show',compact('user'));
     }
 
