@@ -12,7 +12,7 @@
     @include('layouts._header');
     {!! csrf_field() !!}
     <div class="container" id="app">
-        <div class="col-md-offset-1 col-md-10">
+        <div class="col-md-offset-0 col-md-12">
             @include('shared._messages')
             @yield('content')
             @include('layouts._footer')
