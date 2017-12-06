@@ -9,8 +9,10 @@
         <p class="lead">
             <a target="_blank" href="https://d.laravel-china.org/">Laravel文档中心</a>
         </p>
+        @guest
         <p>
            <a class="btn btn-lg btn-success" href="{{ route('signup') }}" role="button">现在注册</a>
         </p>
+        @endguest
     </div>
 @stop

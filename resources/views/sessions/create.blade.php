@@ -33,8 +33,9 @@
                 </form>
 
                 <hr>
-
-                <p>还没账号？<a href="{{ route('signup') }}">现在注册！</a></p>
+                @unless (Auth::check())
+                    <p>还没账号？<a href="{{ route('signup') }}">现在注册！</a></p>
+                @endunless
             </div>
         </div>
     </div>

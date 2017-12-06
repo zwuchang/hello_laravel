@@ -5,9 +5,31 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use Faker;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth',[
+            'except'    =>  ['index','show','create','store']
+        ]);
+
+        //只让未登录用户访问注册页
+        $this->middleware('guest',[
+            'only'  => ['create']
+        ]);
+    }
+
+    /**
+     * 用户列表
+     */
+    public function index()
+    {
+        $users = User::paginate(7);
+        return view('users.index',compact('users'));
+    }
 
     /**
      * @param User $user
@@ -17,6 +39,48 @@ class UsersController extends Controller
     {
         return view('users.show',compact('user'));
     }
+
+    /**
+     * 编辑用户信息
+     * @param User $user
+     */
+    public function edit(User $user)
+    {
+        $this->authorize('update',$user);
+        return view('users.edit',compact('user'));
+    }
+
+    public function update(User $user,Request $request)
+    {
+        $updData = [
+            'name'  =>  $request->name
+        ];
+        $validateArr = [
+            'name'  =>  'required|max:50'
+        ];
+        if (!empty($request->password)){
+            $updData['password'] = bcrypt($request->password);
+            $validateArr['password'] = 'required|confirmed|min:6';
+        }
+
+        $this->authorize('update',$user);
+
+        $this->validate($request,$validateArr);
+        $user->update($updData);
+        session()->flash('success','更新成功');
+        return redirect()->route('users.show',$user->id);
+
+    }
+
+    //删除用户
+    public function destroy(User $user)
+    {
+        $this->authorize('destroy',$user);
+        $user->delete();
+        session()->flash('success','成功删除用户！');
+        return back();
+    }
+
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
