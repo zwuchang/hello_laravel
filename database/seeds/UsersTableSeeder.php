@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
         $user->email = 'admin@zhenxing.site';
         $user->password = bcrypt('admin888');
         $user->is_admin = true;
+        $user->activated = true;
         $user->save();
     }
 }
