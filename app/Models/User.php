@@ -40,6 +40,15 @@ class User extends Authenticatable
     }
 
     /**
+     * 一个用户拥有多条微博
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function statuses()
+    {
+        return $this->hasMany(Status::class);
+    }
+
+    /**
      * https://en.gravatar.com/
      * @param int $size
      */
@@ -52,6 +61,15 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token));
+    }
+
+    /**
+     * 用户微博信息
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feed()
+    {
+        return $this->statuses()->orderBy('created_at','desc');
     }
 
 }

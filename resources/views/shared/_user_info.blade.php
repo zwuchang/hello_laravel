@@ -2,6 +2,6 @@
     <img src="{{ $user->gravatar('140') }}" alt="{{ $user->name }}" class="gravatar">
 </a>
 
-<h1>
+<p class='clear-both'>
     {{ $user->name }}
-</h1>
+</p>
